@@ -8,17 +8,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 body {
-    background: rgb(123, 158, 158);
+    background: #003135;
 }
 
 .container {
-    margin-top: 2rem;
 }
 
-// List/Grid container
+.heading {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem 0 2rem 0;
+    color: #fff;
+}
+
 .hexagons {
     display: flex;
     flex-wrap: wrap;
@@ -31,7 +37,6 @@ body {
     font-size: 12px;
 }
 
-// Single Hexagon
 .hexagon {
     position: relative;
     visibility: hidden;
@@ -48,7 +53,6 @@ body {
     width: 50%;
     margin-left: 0;
 
-    /* indent first hex of even rows for 2-up pattern */
     &:nth-child(3n + 3) {
         margin-left: 25%;
     }
@@ -78,11 +82,14 @@ body {
             overflow: hidden;
             transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
 
-            &:hover,
-            &:focus {
-                .hexagon_title,
-                .hexagon_text {
-                    opacity: 1;
+            &__inert {
+                background-color: #024950;
+            }
+            &__active {
+                background-color: #04a4af;
+                cursor: pointer;
+                &:hover {
+                    background-color: #964734;
                 }
             }
         }
@@ -94,7 +101,7 @@ body {
                     opacity: 1;
                 }
             }
-            .hexLink {
+            .hexagon_rotate {
                 opacity: 1;
             }
         }
@@ -102,7 +109,6 @@ body {
 }
 
 .hexagon_title {
-    color: #f5ce95;
     text-transform: capitalize;
     text-align: center;
     bottom: 50%;
@@ -120,7 +126,6 @@ body {
 .hexagon_text {
     width: 100%;
     padding: 5%;
-    opacity: 0;
 }
 
 .hexagon_image {
@@ -139,23 +144,14 @@ body {
         content: "";
         opacity: 0;
     }
-
-    &::before {
-        background: rgba(22, 103, 137, 0.3);
-    }
-    &::after {
-        background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.5), transparent);
-    }
 }
 
-/* ≤400px typography tweak (still 2 per row) */
 @include breakpoints(0px) {
     .hexagons {
         font-size: 8px;
     }
 }
 
-/* 601px+ → 3 per row */
 @include breakpoints(601px) {
     .hexagons {
         padding-bottom: 7.4%;
@@ -165,19 +161,16 @@ body {
         width: 33.333%;
         margin-left: 0;
 
-        /* cancel smaller breakpoint indentation */
         &:nth-child(3n + 3) {
             margin-left: 0;
         }
 
-        /* indent first hex of even rows for 3-up pattern */
         &:nth-child(5n + 4) {
             margin-left: 16.666%;
         }
     }
 }
 
-/* 901px+ → 4 per row */
 @include breakpoints(901px) {
     .hexagons {
         padding-bottom: 5.5%;
@@ -187,20 +180,17 @@ body {
         width: 25%;
         margin-left: 0;
 
-        /* cancel previous patterns */
         &:nth-child(3n + 3),
         &:nth-child(5n + 4) {
             margin-left: 0;
         }
 
-        /* indent for 4-up */
         &:nth-child(7n + 5) {
             margin-left: 12.5%;
         }
     }
 }
 
-/* 1201px+ → 5 per row */
 @include breakpoints(1201px) {
     .hexagons {
         padding-bottom: 4.4%;
@@ -209,14 +199,12 @@ body {
         width: 20%;
         margin-left: 0;
 
-        /* cancel previous patterns */
         &:nth-child(3n + 3),
         &:nth-child(5n + 4),
         &:nth-child(7n + 5) {
             margin-left: 0;
         }
 
-        /* indent for 5-up */
         &:nth-child(9n + 6) {
             margin-left: 10%;
         }
