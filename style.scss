@@ -1,3 +1,15 @@
+$breakpoint-initial: 0px;
+$breakpoint-medium: 601px;
+$breakpoint-large: 901px;
+$breakpoint-xlarge: 1201px;
+
+$background: #003135;
+$white: #fff;
+
+$hexagon-inert: #024950;
+$hexagon-active: #04a4af;
+$hexagon-hover: #964734;
+
 @mixin breakpoints($px) {
     @media (min-width: $px) {
         @content;
@@ -12,17 +24,14 @@
 }
 
 body {
-    background: #003135;
-}
-
-.container {
+    background: $background;
 }
 
 .heading {
     width: 90%;
     margin: 0 auto;
     padding: 2rem 0 2rem 0;
-    color: #fff;
+    color: $white;
 }
 
 .hexagons {
@@ -47,7 +56,7 @@ body {
     &::after {
         content: "";
         display: block;
-        padding-bottom: 86.602%;
+        padding-bottom: 86.6%;
     }
 
     width: 50%;
@@ -78,18 +87,18 @@ body {
             width: 100%;
             height: 100%;
             text-align: center;
-            color: #fff;
+            color: $white;
             overflow: hidden;
             transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
 
             &__inert {
-                background-color: #024950;
+                background-color: $hexagon-inert;
             }
             &__active {
-                background-color: #04a4af;
+                background-color: $hexagon-active;
                 cursor: pointer;
                 &:hover {
-                    background-color: #964734;
+                    background-color: $hexagon-hover;
                 }
             }
         }
@@ -146,13 +155,13 @@ body {
     }
 }
 
-@include breakpoints(0px) {
+@include breakpoints($breakpoint-initial) {
     .hexagons {
         font-size: 8px;
     }
 }
 
-@include breakpoints(601px) {
+@include breakpoints($breakpoint-medium) {
     .hexagons {
         padding-bottom: 7.4%;
         font-size: 14px;
@@ -171,7 +180,7 @@ body {
     }
 }
 
-@include breakpoints(901px) {
+@include breakpoints($breakpoint-large) {
     .hexagons {
         padding-bottom: 5.5%;
         font-size: 13px;
@@ -191,7 +200,7 @@ body {
     }
 }
 
-@include breakpoints(1201px) {
+@include breakpoints($breakpoint-xlarge) {
     .hexagons {
         padding-bottom: 4.4%;
     }
