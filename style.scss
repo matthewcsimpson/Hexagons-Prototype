@@ -49,7 +49,6 @@ body {
 .hexagon {
     position: relative;
     visibility: hidden;
-    outline: 1px solid transparent;
     backface-visibility: hidden;
     will-change: transform;
 
@@ -73,13 +72,11 @@ body {
         margin: 2%;
         overflow: hidden;
         visibility: hidden;
-        outline: 1px solid transparent;
         transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
 
         * {
             position: absolute;
             visibility: visible;
-            outline: 1px solid transparent;
         }
 
         .hexagon_content {
@@ -94,24 +91,14 @@ body {
             &__inert {
                 background-color: $hexagon-inert;
             }
+
             &__active {
                 background-color: $hexagon-active;
                 cursor: pointer;
+
                 &:hover {
                     background-color: $hexagon-hover;
                 }
-            }
-        }
-
-        &:hover {
-            .hexagon_image {
-                &::before,
-                &::after {
-                    opacity: 1;
-                }
-            }
-            .hexagon_rotate {
-                opacity: 1;
             }
         }
     }
@@ -125,6 +112,7 @@ body {
     font-size: 1.5em;
     z-index: 1;
 }
+
 .hexagon_text {
     top: 50%;
     text-align: center;
@@ -153,6 +141,19 @@ body {
         content: "";
         opacity: 0;
     }
+
+    &::after {
+        background: rgba(0, 0, 0, 0.4);
+        transition: opacity 0.3s ease;
+    }
+}
+
+/* Restrict dim effect to active hexagons with images */
+.hexagon_content__active:hover .hexagon_image::after {
+    opacity: 1;
+}
+.hexagon_content__inert:hover .hexagon_image::after {
+    opacity: 0;
 }
 
 @include breakpoints($breakpoint-initial) {

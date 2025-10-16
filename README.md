@@ -1,5 +1,6 @@
 ## Hexagon
-A simple responsive hexagon grid created with HTML and SCSS. 
+
+A simple responsive hexagon grid created with HTML and SCSS.
 
 You can [see it running in this Codepen](https://codepen.io/matthewcsimpson/pen/KwdELrY).
 

@@ -115,6 +115,7 @@ const container = document.querySelector(".hexagons");
 
 const createHexagon = (hexagons) => {
   hexagons.forEach((hex) => {
+    // Create a new Hexagon
     const hexagonElement = document.createElement("li");
     hexagonElement.classList.add("hexagon");
     if (hex.active) {
@@ -123,9 +124,11 @@ const createHexagon = (hexagons) => {
       });
     }
 
+    // Create the inner structure
     const hexagonRotate = document.createElement("div");
     hexagonRotate.classList.add("hexagon_rotate");
 
+    // Create the content
     const hexagonContent = document.createElement("div");
     hexagonContent.classList.add("hexagon_content");
     if (hex.active) {
@@ -134,10 +137,13 @@ const createHexagon = (hexagons) => {
       hexagonContent.classList.add("hexagon_content__inert");
     }
 
+    // Create the image (if available)
     const hexagonImage = document.createElement("div");
     hexagonImage.classList.add("hexagon_image");
     if (hex.image) {
       hexagonImage.style.backgroundImage = `url(${hex.image})`;
+      hexagonImage.style.backgroundSize = "cover";
+      hexagonImage.style.backgroundPosition = "center";
     }
 
     const hexagonTitle = document.createElement("h1");
