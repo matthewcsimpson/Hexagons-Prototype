@@ -111,9 +111,30 @@ const hexagons = [
   },
 ];
 
+// Enable TypeScript type checking in plain JS files
+// @ts-check
+
+// Select the container
 const container = document.querySelector(".hexagons");
 
-const createHexagon = (hexagons) => {
+/**
+ * @typedef {Object} Hexagon
+ * @property {string} title
+ * @property {string} description
+ * @property {boolean} active
+ * @property {string} image
+ */
+
+/**
+ * Creates hexagon elements from the provided data.
+ * @param {Hexagon[]} hexagons
+ * @param {HTMLElement | null} [target]
+ * @returns {void}
+ */
+const createHexagon = (hexagons, target = null) => {
+  const containerEl = target || container;
+  if (!containerEl) return;
+
   hexagons.forEach((hex) => {
     // Create a new Hexagon
     const hexagonElement = document.createElement("li");
@@ -146,22 +167,25 @@ const createHexagon = (hexagons) => {
       hexagonImage.style.backgroundPosition = "center";
     }
 
+    // Create the title
     const hexagonTitle = document.createElement("h1");
     hexagonTitle.classList.add("hexagon_title");
     hexagonTitle.textContent = hex.title;
 
+    // Create the description
     const hexagonText = document.createElement("p");
     hexagonText.classList.add("hexagon_text");
     hexagonText.textContent = hex.description;
 
+    // Append all parts together
     hexagonContent.appendChild(hexagonImage);
     hexagonContent.appendChild(hexagonTitle);
     hexagonContent.appendChild(hexagonText);
-
     hexagonRotate.appendChild(hexagonContent);
     hexagonElement.appendChild(hexagonRotate);
-    container.appendChild(hexagonElement);
+    containerEl.appendChild(hexagonElement);
   });
 };
 
+// Initialize the hexagons
 createHexagon(hexagons);
